@@ -1,0 +1,59 @@
+---
+title: "Title"
+author: "Me"
+date: "2017"
+output: 
+  pdf_document: 
+    dev: pdf
+    fig_caption: yes
+    number_sections: yes
+    toc: yes
+    toc_depth: 3
+documentclass: article
+urlcolor: blue
+classoption: a4paper
+header-includes:
+- \usepackage{graphicx}
+- \usepackage{float}
+---
+
+```{r setup, message=FALSE, warning=FALSE, include=FALSE}
+library("RColorBrewer")
+library("pheatmap")
+library("knitr")
+knitr::opts_chunk$set(
+    echo = FALSE,
+    message = FALSE,
+    warning = FALSE,
+    fig.align='center',
+    fig.pos='H',
+    fig.path = "plots/",
+    dev = c("png", "svg"),
+    dpi=500
+)
+
+```
+
+Some text here...                    
+
+```{r prueba, echo=FALSE, message=FALSE, warning=FALSE}
+hmcol <- rev(brewer.pal(11,"RdBu"))
+pl <- pheatmap(  as.matrix(mtcars[1:20,1:6])
+           , scale = "row"
+           , cellwidth = 15
+           , color = hmcol
+           , border_color = NA
+           , clustering_distance_cols = "correlation" 
+           , clustering_distance_rows = "correlation" 
+           , cluster_rows = T
+           , cluster_cols = T
+           , treeheight_row = 0
+           , treeheight_col = 0
+           , legend = TRUE
+           , show_rownames = T
+           , show_colnames = T
+           , labels_col = c("A", "B", "C", "D", "E", "F")
+          )
+```
+
+
